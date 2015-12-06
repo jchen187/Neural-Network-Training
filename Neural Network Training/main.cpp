@@ -8,10 +8,13 @@
 
 #include <iostream>
 #include <fstream> //reading from file
-
-int inputNodes, hiddenNodes, outputNodes;
+#include <vector>
 
 using namespace std;
+
+int inputNodes, hiddenNodes, outputNodes;
+vector<vector<float>> weightsToHidden;
+vector<vector<float>> weightsToOutput;
 
 int main(int argc, const char * argv[]) {
 
@@ -31,6 +34,21 @@ int main(int argc, const char * argv[]) {
                 myFile >> hiddenNodes;
             if (i == 2){
                 myFile >> outputNodes;
+            }
+        }
+        weightsToHidden.resize(hiddenNodes);
+        for (int j = 0; j < hiddenNodes; j++){
+            weightsToHidden[j].resize(inputNodes+1);
+            for (int m = 0; m <= inputNodes; m++){
+                cout << "j = " << j << "m = " << m << endl;
+                myFile >> weightsToHidden[j][m];
+            }
+        }
+        weightsToOutput.resize(outputNodes);
+        for (int k = 0; k < outputNodes; k++){
+            weightsToOutput[k].resize(hiddenNodes+1);
+            for (int n = 0; n <= hiddenNodes; n++){
+                myFile >> weightsToOutput[k][n];
             }
         }
         myFile.close();
