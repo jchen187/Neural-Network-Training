@@ -15,13 +15,39 @@ using namespace std;
 int inputNodes, hiddenNodes, outputNodes;
 vector<vector<float>> weightsToHidden;
 vector<vector<float>> weightsToOutput;
+string file1, file2, file3;
+
+void readFromFile1(string name);
+void readFromFile2(string name);
 
 int main(int argc, const char * argv[]) {
 
-    string file1, file2, file3;
     cout << "Please enter the file containing the initial neural network\n";
     //read the file
     cin >> file1;
+    readFromFile1(file1);
+    
+    cout << "Please enter the file contraining the training set.\n";
+    cin >> file2;
+    readFromFile2(file2);
+    
+    cout << "Where would you like to output the results to?\n";
+    return 0;
+}
+
+void readFromFile1(string name){
+    /*
+     1st line has 3 integers
+     - number of input nodes
+     - number of hidden nodes
+     - number of output nodes
+     
+     Next Nh lines each has Ni + 1 weights entering the 1st hidden node, then 2nd ... until Nh
+     There is a +1 because a bias weight which is always the first weight
+     Weights are floating point numbers
+     
+     Next No has Nh + 1 weights
+     */
     
     ifstream myFile;
     myFile.open(file1);
@@ -55,21 +81,20 @@ int main(int argc, const char * argv[]) {
     }
     else
         cout << "Unable to open file.\n";
-    
-    cout << "Please enter the file contraining the training set.\n";
-    cout << "Where would you like to output the results to?\n";
-    return 0;
 }
 
-/*
- 1st line has 3 integers
- - number of input nodes
- - number of hidden nodes 
- - number of output nodes
- 
- Next Nh lines each has Ni + 1 weights entering the 1st hidden node, then 2nd ... until Nh
- There is a +1 because a bias weight which is always the first weight
- Weights are floating point numbers
- 
- Next No has Nh + 1 weights
-*/
+//training examples to train
+void readFromFile2(string name){
+    /*
+     1st line has 3 integers
+     - number of training examples
+     - number of input nodes(will match file1)
+     - number of output nodes(will match file1)
+     
+     every other line is an example 
+     - Ni floating point inputs
+     - No Boolean output(0 or 1)
+     */
+}
+
+
