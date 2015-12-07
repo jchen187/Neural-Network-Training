@@ -12,13 +12,19 @@
 
 using namespace std;
 
+string file1, file2, file3;
+
+//from the first file
 int inputNodes, hiddenNodes, outputNodes;
 vector<vector<float>> weightsToHidden;
 vector<vector<float>> weightsToOutput;
-string file1, file2, file3;
 
+//from the 2nd file
 int numTrainingExamples, inputs, outputs;
 int epoch, learningRate;
+
+vector<vector<float>> exampleInputs;
+vector<vector<int>> exampleOutputs;
 
 void readFromFile1(string name);
 void readFromFile2(string name);
@@ -27,11 +33,14 @@ int main(int argc, const char * argv[]) {
 
     cout << "Please enter the file containing the initial neural network\n";
     //read the file
-    cin >> file1;
+//    cin >> file1;
+    file1 = "initialNN.txt";
     readFromFile1(file1);
     
-    cout << "Please enter the file contraining the training set.\n";
-    cin >> file2;
+    cout << "Please enter the file containing the training set.\n";
+//    cin >> file2;
+//    readFromFile2(file2);
+    file2 = "train.txt";
     readFromFile2(file2);
     
     cout << "Where would you like to output the results to?\n";
@@ -96,7 +105,7 @@ void readFromFile1(string name){
 //training examples to train
 void readFromFile2(string name){
     ifstream myFile;
-    myFile.open(file1);
+    myFile.open(file2);
     if (myFile.is_open()){
         //Put contents of file into array
         for (int i = 0; i <= 3; i++){
@@ -108,12 +117,27 @@ void readFromFile2(string name){
                 myFile >> outputs;
             }
         }
-        if (inputs != inputNodes && outputs != outputNodes){
+        if (inputs != inputNodes || outputs != outputNodes){
             cout << "The input and output values do not match the initial neural network.";
         }
         else{
+            int sum = inputs + outputs;
+            
+            exampleInputs.resize(numTrainingExamples);
+            exampleOutputs.resize(numTrainingExamples);
             //go through each line one at a time, put the stuff in a vector, and do the backprop
-            //look at epoch
+            for (int i = 0; i < numTrainingExamples; i++){
+                exampleInputs[i].resize(inputs);
+                exampleOutputs[i].resize(outputs);
+                for (int j = 0; j < sum; j++){
+                    if (j < inputs){
+                        myFile >> exampleInputs[i][j];
+                    }
+                    else {
+                        myFile >> exampleOutputs[i][j - inputs];
+                    }
+                }
+            }
             myFile.close();
         }
     }
@@ -133,13 +157,13 @@ void readFromFile2(string name){
 }
 
 //given return a neural network
-vector<vector<int>> backPropLearning(vector<int> examples, vector<vector<int>> network){
+vector<vector<int>> backPropLearning(vector<vector<int>> exampleInputs, vector<vector<int>> exampleOutputs, vector<vector<int>> network){
     
     //what does it mean indexed by network node
     vector<int> errors;
     
     int loop = 0;
-    //
+    
     while (loop < epoch){
         //go through each example in examples
         loop++;
