@@ -31,6 +31,8 @@ vector<vector<float>> examples;
 
 void readFromFile1(string name);
 void readFromFile2(string name);
+vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network);
+
 
 int main(int argc, const char * argv[]) {
 
@@ -54,13 +56,19 @@ int main(int argc, const char * argv[]) {
     examples.insert( examples.end(), exampleInputs.begin(), exampleInputs.end() );
     examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
+    backPropLearning(examples, network);
+    
     cout << "Where would you like to output the results to?\n";
     
     cout << "Choose epoch.";
-    cin >> epoch;
+//    cin >> epoch;
+    epoch = 2;
     
     cout << "Choose learning rate.";
-    cin >> learningRate;
+//    cin >> learningRate;
+    learningRate = 2;
+    
+    backPropLearning(examples, network);
     
     return 0;
 }
@@ -168,7 +176,13 @@ void readFromFile2(string name){
 }
 
 float applyActivFunct(float x){
-    return 1/(1+exp(-1*x));
+    float result = 1/(1+exp(-1*x));
+    return result;
+}
+
+float applyDerivActivFunct(float x){
+    float result = applyActivFunct(x) * (1 - applyActivFunct(x));;
+    return result;
 }
 
 //given return a neural network and the examples, return a neural network
@@ -185,11 +199,52 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
         //you could do numTrainingExamples or you can do the exampleInputs.size()
         for (int i = 0; i < numTrainingExamples; i++){
     
-            vector<float> base = exampleInputs[i];
-            for (int layer = 2; layer <= 3; layer++){
-                for (int j = 0; j < hiddenNodes; j++){
-                    
+            //get inputs
+            vector<float> base = examples[i];
+            
+            
+            //propagate the inputs forward to compute the outputs
+            vector<float> middle;
+            middle.resize(hiddenNodes);
+            
+            //loop through each hidden node
+            for (int j = 0; j < hiddenNodes; j++){
+                float result;
+                //get contribution from each node from previous layer
+                for (int k = 0; k < inputNodes+1; k++){
+                    //for the first weight, multiply by the fixed input -1
+                    if (k == 0){
+                        result += -1 * network[j][0];
+                    }
+                    else {
+                        //network has the bias weight at the beginningn and is ahead of the example/base
+                        result += network[j][k] * base[k-1];
+                    }
                 }
+                middle[j] = applyActivFunct(result);
+            }
+            
+            //output
+            vector<float> top;
+            top.resize(outputNodes);
+            for (int j = 0; j < outputNodes; j++){
+                for (int k = 0; k < hiddenNodes; k++){
+                    top[j] += network[i][k] * applyActivFunct( middle[k] );
+                }
+            }
+            
+            //propagate error backwards from output layer to input
+            //go through each node in the output later
+            for (int j = 0; j < outputNodes; j++){
+                errors[j] = applyDerivActivFunct(top[j]) * (base[numTrainingExamples+j] - top[j]);
+            }
+            
+            for (int j = 0; j < hiddenNodes; j++){
+                
+            }
+            
+            //update every weight in network
+            for (int j = 0; j < network.size(); j++){
             }
         }
         loop++;
