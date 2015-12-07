@@ -228,9 +228,16 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
             vector<float> top;
             top.resize(outputNodes);
             for (int j = 0; j < outputNodes; j++){
-                for (int k = 0; k < hiddenNodes; k++){
-                    top[j] += network[i][k] * applyActivFunct( middle[k] );
+                float result;
+                for (int k = 0; k < hiddenNodes+1; k++){
+                    if (k == 0){
+                        result += -1 * network[j][0];
+                    }
+                    else {
+                        top[j] += network[i][k] * middle[k-1];
+                    }
                 }
+                top[j] = applyActivFunct(result);
             }
             
             //propagate error backwards from output layer to input
