@@ -9,6 +9,7 @@
 #include <iostream>
 #include <fstream> //reading from file
 #include <vector>
+#include <math.h> //to use the activation function because we need e
 
 using namespace std;
 
@@ -18,13 +19,15 @@ string file1, file2, file3;
 int inputNodes, hiddenNodes, outputNodes;
 vector<vector<float>> weightsToHidden;
 vector<vector<float>> weightsToOutput;
+vector<vector<float>> network;
 
 //from the 2nd file
 int numTrainingExamples, inputs, outputs;
 int epoch, learningRate;
 
 vector<vector<float>> exampleInputs;
-vector<vector<int>> exampleOutputs;
+vector<vector<float>> exampleOutputs; //0 or 1
+vector<vector<float>> examples;
 
 void readFromFile1(string name);
 void readFromFile2(string name);
@@ -37,11 +40,19 @@ int main(int argc, const char * argv[]) {
     file1 = "initialNN.txt";
     readFromFile1(file1);
     
+    network.reserve( weightsToHidden.size() + weightsToOutput.size() ); // preallocate memory
+    network.insert( network.end(), weightsToHidden.begin(), weightsToHidden.end() );
+    network.insert( network.end(), weightsToOutput.begin(), weightsToOutput.end() );
+    
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
 //    readFromFile2(file2);
     file2 = "train.txt";
     readFromFile2(file2);
+    
+    examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
+    examples.insert( examples.end(), exampleInputs.begin(), exampleInputs.end() );
+    examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
     cout << "Where would you like to output the results to?\n";
     
@@ -85,7 +96,7 @@ void readFromFile1(string name){
         for (int j = 0; j < hiddenNodes; j++){
             weightsToHidden[j].resize(inputNodes+1);
             for (int m = 0; m <= inputNodes; m++){
-                cout << "j = " << j << "m = " << m << endl;
+//                cout << "j = " << j << "m = " << m << endl;
                 myFile >> weightsToHidden[j][m];
             }
         }
@@ -156,16 +167,31 @@ void readFromFile2(string name){
      */
 }
 
-//given return a neural network
-vector<vector<int>> backPropLearning(vector<vector<int>> exampleInputs, vector<vector<int>> exampleOutputs, vector<vector<int>> network){
+float applyActivFunct(float x){
+    return 1/(1+exp(-1*x));
+}
+
+//given return a neural network and the examples, return a neural network
+//examples include both input and output examples. same with network. contains first weight from input to hidden node, then hidden node to output
+vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network){
     
     //what does it mean indexed by network node
-    vector<int> errors;
+    vector<float> errors;
     
     int loop = 0;
     
     while (loop < epoch){
         //go through each example in examples
+        //you could do numTrainingExamples or you can do the exampleInputs.size()
+        for (int i = 0; i < numTrainingExamples; i++){
+    
+            vector<float> base = exampleInputs[i];
+            for (int layer = 2; layer <= 3; layer++){
+                for (int j = 0; j < hiddenNodes; j++){
+                    
+                }
+            }
+        }
         loop++;
     }
     
