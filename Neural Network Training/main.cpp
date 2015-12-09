@@ -10,6 +10,7 @@
 #include <fstream> //reading from file
 #include <vector>
 #include <math.h> //to use the activation function because we need e
+#include <iomanip> //for 3 decimal places
 
 using namespace std;
 
@@ -71,7 +72,7 @@ int main(int argc, const char * argv[]) {
     
     vector<vector<float>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
-    writeNetworkToFile("t.txt", network);
+//    writeNetworkToFile("t.txt", network);
 
     return 0;
 }
@@ -236,10 +237,10 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                 float result;
                 for (int k = 0; k < hiddenNodes+1; k++){
                     if (k == 0){
-                        result += -1 * network[j][0];
+                        result += -1 * network[hiddenNodes+j][0];
                     }
                     else {
-                        result += network[j][k] * middle[k-1];
+                        result += network[hiddenNodes+j][k] * middle[k-1];
                     }
                 }
                 top[j] = applyActivFunct(result);
@@ -300,15 +301,15 @@ void writeNetworkToFile(string name, vector<vector<float>> network){
         for (int i = 0; i < hiddenNodes; i++){
 //            myfile << "This is another line.\n";
             for (int j = 0; j < inputNodes + 1; j++){
-                
-                myfile << network[i][j] * 1.000 << " ";
+                myfile << fixed << setprecision(3) << network[i][j] << " ";
+//                myfile << network[i][j] << " ";
             }
             myfile << "\n";
         }
         for (int i = 0; i < outputNodes; i++){
             
             for (int j = 0; j < hiddenNodes + 1; j++){
-                myfile << network[hiddenNodes+i][j] << " ";
+                myfile << fixed << setprecision(3) << network[hiddenNodes+i][j] << " ";
             }
             myfile << "\n";
         }

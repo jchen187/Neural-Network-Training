@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471337830.99919"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471337830.99919"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
             <Locations>
@@ -134,11 +134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "276"
-            endingLineNumber = "276"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -150,11 +150,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -166,11 +166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "writeNetworkToFile(string name, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -182,11 +182,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471337830.99919"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -198,11 +198,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471338067.313443"
+            timestampString = "471340177.425819"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
