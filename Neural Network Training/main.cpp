@@ -231,8 +231,8 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     }
                 }
                 middle[j] = result;
-                cout << "Middle" << j << endl;
-                cout << middle[j] << "\n\n";
+//                cout << "Middle" << j << endl;
+//                cout << middle[j] << "\n\n";
                 
 //                middle[j] = applyActivFunct(result);
             }
@@ -312,7 +312,6 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     else {
                         network[hiddenNodes+j][k] = network[hiddenNodes+j][k] + learningRate * applyActivFunct(middle[k-1]) * errors[0][j];
                         
-                        //problem i have is i keep adding the middle[k-1] to itself
                         cout << middle[k-1] << " - " << applyActivFunct(middle[k-1]) << endl;
                     }
                 }
