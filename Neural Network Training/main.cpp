@@ -18,24 +18,25 @@ string file1, file2, file3;
 
 //from the first file
 int inputNodes, hiddenNodes, outputNodes;
-vector<vector<float>> weightsToHidden;
-vector<vector<float>> weightsToOutput;
-vector<vector<float>> network;
+vector<vector<double>> weightsToHidden;
+vector<vector<double>> weightsToOutput;
+vector<vector<double>> network;
 
 //from the 2nd file
 int numTrainingExamples, inputs, outputs;
-vector<vector<float>> exampleInputs;
-vector<vector<float>> exampleOutputs; //0 or 1
-vector<vector<float>> examples;
+vector<vector<double>> exampleInputs;
+vector<vector<double>> exampleOutputs; //0 or 1
+vector<vector<double>> examples;
 
 //user enters this
-int epoch, learningRate;
+int epoch;
+double learningRate;
 
 void readFromFile1(string name);
 void readFromFile2(string name);
-void writeNetworkToFile(string name, vector<vector<float>> network);
+void writeNetworkToFile(string name, vector<vector<double>> network);
 
-vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network);
+vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<vector<double>> network);
 
 int main(int argc, const char * argv[]) {
 
@@ -53,6 +54,7 @@ int main(int argc, const char * argv[]) {
 //    cin >> file2;
 //    readFromFile2(file2);
     file2 = "miniTrain.txt";
+//    file2 = "train.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -61,6 +63,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "Where would you like to output the results to?\n";
     file3 = "compareToMiniResults.txt";
+//    file3 = "compareToTrainNN.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
@@ -70,7 +73,7 @@ int main(int argc, const char * argv[]) {
 //    cin >> learningRate;
     learningRate = 0.1;
     
-    vector<vector<float>> newNetwork = backPropLearning(examples, network);
+    vector<vector<double>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
 //    writeNetworkToFile("t.txt", network);
 
@@ -86,7 +89,7 @@ void readFromFile1(string name){
      
      Next Nh lines each has Ni + 1 weights entering the 1st hidden node, then 2nd ... until Nh
      There is a +1 because a bias weight which is always the first weight
-     Weights are floating point numbers
+     Weights are doubleing point numbers
      
      Next No has Nh + 1 weights
      */
@@ -134,7 +137,7 @@ void readFromFile2(string name){
      - number of output nodes(will match file1)
      
      every other line is an example
-     - Ni floating point inputs
+     - Ni doubleing point inputs
      - No Boolean output(0 or 1)
      */
     
@@ -179,22 +182,22 @@ void readFromFile2(string name){
         cout << "Unable to open file.\n";
 }
 
-float applyActivFunct(float x){
-    float result = 1/(1+exp(-1*x));
+double applyActivFunct(double x){
+    double result = 1/(1+exp(-1*x));
     return result;
 }
 
-float applyDerivActivFunct(float x){
-    float result = applyActivFunct(x) * (1 - applyActivFunct(x));;
+double applyDerivActivFunct(double x){
+    double result = applyActivFunct(x) * (1 - applyActivFunct(x));;
     return result;
 }
 
 //given return a neural network and the examples, return a neural network
 //examples include both input and output examples. same with network. contains first weight from input to hidden node, then hidden node to output
-vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network){
+vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<vector<double>> network){
     
     //error for both outlayer and hiddenlayer
-    vector<vector<float>> errors;
+    vector<vector<double>> errors;
     errors.resize(2);
     errors[0].resize(outputNodes);
     errors[1].resize(hiddenNodes);
@@ -207,15 +210,15 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
         for (int i = 0; i < numTrainingExamples; i++){
     
             //base will contain all the example inputs
-            vector<float> base = examples[i];
+            vector<double> base = examples[i];
             
             //propagate the inputs forward to compute the outputs
-            vector<float> middle;
+            vector<double> middle;
             middle.resize(hiddenNodes);
             
             //loop through each hidden node
             for (int j = 0; j < hiddenNodes; j++){
-                float result;
+                double result = 0;
                 //get contribution from each node from previous layer
                 for (int k = 0; k < inputNodes+1; k++){
                     //for the first weight, multiply by the fixed input -1
@@ -227,32 +230,44 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                         result += network[j][k] * base[k-1];
                     }
                 }
-                middle[j] = applyActivFunct(result);
+                middle[j] = result;
+                cout << "Middle" << j << endl;
+                cout << middle[j] << "\n\n";
+                
+//                middle[j] = applyActivFunct(result);
             }
             
             //output
-            vector<float> top;
+            vector<double> top;
             top.resize(outputNodes);
             for (int j = 0; j < outputNodes; j++){
-                float result;
+                double result = 0;
                 for (int k = 0; k < hiddenNodes+1; k++){
                     if (k == 0){
                         result += -1 * network[hiddenNodes+j][0];
                     }
                     else {
-                        result += network[hiddenNodes+j][k] * middle[k-1];
+                        result += network[hiddenNodes+j][k] * applyActivFunct(middle[k-1]);
                     }
                 }
-                top[j] = applyActivFunct(result);
+                top[j] = result;
+//                top[j] = applyActivFunct(result);
             }
             
-            //vector<float> base = examples[i];
+            //vector<double> base = examples[i];
             
             //propagate delta backwards from output layer to input
             //go through each node in the output later
             //errors[0] contains the error of the output
             for (int j = 0; j < outputNodes; j++){
-                errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - top[j]);
+                errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - applyActivFunct(top[j]));
+                cout << top[j] << endl;
+                cout << applyActivFunct( top[j]) << endl;
+                cout << applyDerivActivFunct(top[j]) << endl;
+                cout << examples[numTrainingExamples+i][j] << endl;
+                cout << errors[0][j] << "\n\n\n";
+                
+                
             }
             
             for (int j = 0; j < hiddenNodes; j++){
@@ -270,8 +285,17 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                 //wij = wij + learningRate * activationI *errorsJ
                 
                 //input to hidden layer
-                for (int k = 0; k < inputNodes; k++){
-                    network[j][k] = network[j][k] + learningRate * base[k] * errors[1][j];
+                for (int k = 0; k < inputNodes+1; k++){
+                    if (k==0){
+                        network[j][k] = network[j][k] + learningRate * -1 * errors[1][j];
+                    }
+                    else {
+                        network[j][k] = network[j][k] + learningRate * base[k-1] * errors[1][j];
+//                        cout << "learn " << learningRate << endl;
+//                        cout << base[k-1] << endl;
+//                        cout << errors[1][j] << endl;
+                    }
+                    
                 }
             }
             
@@ -279,10 +303,22 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                 //wij = wij + learningRate * activationI *errorsJ
                 
                 //hidden layer to output
-                for (int k = 0; k < hiddenNodes; k++){
-                    network[j][k] = network[j][k] + learningRate * middle[k] * errors[0][j];
+                for (int k = 0; k < hiddenNodes+1; k++){
+                    //update bias weight
+                    if (k==0){
+                        network[hiddenNodes+j][k] = network[hiddenNodes+j][k] + learningRate * -1 * errors[0][j];
+
+                    }
+                    else {
+                        network[hiddenNodes+j][k] = network[hiddenNodes+j][k] + learningRate * applyActivFunct(middle[k-1]) * errors[0][j];
+                        
+                        //problem i have is i keep adding the middle[k-1] to itself
+                        cout << middle[k-1] << " - " << applyActivFunct(middle[k-1]) << endl;
+                    }
                 }
             }
+            
+            //I DONT THINK I DID THE BIAS WEIGHT
         }
         loop++;
     }
@@ -290,7 +326,7 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
     return network;
 }
 
-void writeNetworkToFile(string name, vector<vector<float>> network){
+void writeNetworkToFile(string name, vector<vector<double>> network){
     ofstream myfile;
     myfile.open (name);
     if (myfile.is_open())
