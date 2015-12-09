@@ -61,13 +61,13 @@ int main(int argc, const char * argv[]) {
     cout << "Where would you like to output the results to?\n";
     file3 = "results.txt";
     
-    cout << "Choose epoch.";
+    cout << "Choose epoch.\n";
 //    cin >> epoch;
-    epoch = 2;
+    epoch = 100;
     
-    cout << "Choose learning rate.";
+    cout << "Choose learning rate.\n";
 //    cin >> learningRate;
-    learningRate = 2;
+    learningRate = 0.1;
     
     vector<vector<float>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
@@ -293,8 +293,24 @@ void writeNetworkToFile(string name, vector<vector<float>> network){
     myfile.open (name);
     if (myfile.is_open())
     {
-        myfile << "This is a line.\n";
-        myfile << "This is another line.\n";
+        myfile << inputNodes << " " << hiddenNodes << " " << outputNodes << "\n";
+        
+        //size is hidden + output
+        for (int i = 0; i < hiddenNodes; i++){
+//            myfile << "This is another line.\n";
+            for (int j = 0; j < inputNodes; j++){
+                myfile << network[i][j] << " ";
+            }
+            myfile << "\n";
+        }
+        for (int i = 0; i < outputNodes; i++){
+            
+            for (int j = 0; j < hiddenNodes; j++){
+                myfile << network[i][j] << " ";
+            }
+            myfile << "\n";
+        }
+        
         myfile.close();
     }
     else cout << "Unable to open file";
