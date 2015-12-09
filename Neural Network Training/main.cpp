@@ -71,7 +71,8 @@ int main(int argc, const char * argv[]) {
     
     vector<vector<float>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
-    
+    writeNetworkToFile("t.txt", network);
+
     return 0;
 }
 
@@ -298,15 +299,16 @@ void writeNetworkToFile(string name, vector<vector<float>> network){
         //size is hidden + output
         for (int i = 0; i < hiddenNodes; i++){
 //            myfile << "This is another line.\n";
-            for (int j = 0; j < inputNodes; j++){
-                myfile << network[i][j] << " ";
+            for (int j = 0; j < inputNodes + 1; j++){
+                
+                myfile << network[i][j] * 1.000 << " ";
             }
             myfile << "\n";
         }
         for (int i = 0; i < outputNodes; i++){
             
-            for (int j = 0; j < hiddenNodes; j++){
-                myfile << network[i][j] << " ";
+            for (int j = 0; j < hiddenNodes + 1; j++){
+                myfile << network[hiddenNodes+i][j] << " ";
             }
             myfile << "\n";
         }
