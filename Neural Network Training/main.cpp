@@ -254,19 +254,29 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
             for (int j = 0; j < hiddenNodes; j++){
                 //loop through the output layer
                 for (int k = 0; k < outputNodes; k++){
-                    //errors[1][j] += network[hiddenNodes+][k+1] * errors[0][k];
+                    //ARE WE IGNORING THE BIAS WEIGHT? if we are we will use j+1
+                    errors[1][j] += network[hiddenNodes+k-1][j+1] * errors[0][k];
                 }
                 errors[1][j] *= applyDerivActivFunct(middle[j]);
             }
             
-            //update every weight in network
-            for (int j = 0; j < network.size(); j++){
+            //update every weight in network - breaking this up into two separate parts
+            //
+            for (int j = 0; j < hiddenNodes; j++){
                 //wij = wij + learningRate * activationI *errorsJ
-                if (j < hiddenNodes){
-                    
+                
+                //input to hidden layer
+                for (int k = 0; k < inputNodes; k++){
+                    network[j][k] = network[j][k] + learningRate * base[k] * errors[1][j];
                 }
-                else {
-                    
+            }
+            
+            for (int j = 0; j < outputNodes; j++){
+                //wij = wij + learningRate * activationI *errorsJ
+                
+                //hidden layer to output
+                for (int k = 0; k < hiddenNodes; k++){
+                    network[j][k] = network[j][k] + learningRate * middle[k] * errors[0][j];
                 }
             }
         }
