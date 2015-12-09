@@ -52,7 +52,7 @@ int main(int argc, const char * argv[]) {
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
 //    readFromFile2(file2);
-    file2 = "train.txt";
+    file2 = "miniTrain.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -60,11 +60,11 @@ int main(int argc, const char * argv[]) {
     examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
     cout << "Where would you like to output the results to?\n";
-    file3 = "results.txt";
+    file3 = "compareToMiniResults.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
-    epoch = 100;
+    epoch = 1;
     
     cout << "Choose learning rate.\n";
 //    cin >> learningRate;
@@ -302,18 +302,15 @@ void writeNetworkToFile(string name, vector<vector<float>> network){
 //            myfile << "This is another line.\n";
             for (int j = 0; j < inputNodes + 1; j++){
                 myfile << fixed << setprecision(3) << network[i][j] << " ";
-//                myfile << network[i][j] << " ";
             }
             myfile << "\n";
         }
         for (int i = 0; i < outputNodes; i++){
-            
             for (int j = 0; j < hiddenNodes + 1; j++){
                 myfile << fixed << setprecision(3) << network[hiddenNodes+i][j] << " ";
             }
             myfile << "\n";
         }
-        
         myfile.close();
     }
     else cout << "Unable to open file";
