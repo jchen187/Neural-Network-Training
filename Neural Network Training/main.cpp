@@ -32,6 +32,8 @@ int epoch, learningRate;
 
 void readFromFile1(string name);
 void readFromFile2(string name);
+void writeNetworkToFile(string name, vector<vector<float>> network);
+
 vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network);
 
 int main(int argc, const char * argv[]) {
@@ -56,9 +58,8 @@ int main(int argc, const char * argv[]) {
     examples.insert( examples.end(), exampleInputs.begin(), exampleInputs.end() );
     examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
-    backPropLearning(examples, network);
-    
     cout << "Where would you like to output the results to?\n";
+    file3 = "results.txt";
     
     cout << "Choose epoch.";
 //    cin >> epoch;
@@ -68,7 +69,8 @@ int main(int argc, const char * argv[]) {
 //    cin >> learningRate;
     learningRate = 2;
     
-    backPropLearning(examples, network);
+    vector<vector<float>> newNetwork = backPropLearning(examples, network);
+    writeNetworkToFile(file3, newNetwork);
     
     return 0;
 }
@@ -236,7 +238,7 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                         result += -1 * network[j][0];
                     }
                     else {
-                        top[j] += network[i][k] * middle[k-1];
+                        result += network[j][k] * middle[k-1];
                     }
                 }
                 top[j] = applyActivFunct(result);
@@ -285,4 +287,17 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
     
     return network;
 }
+
+void writeNetworkToFile(string name, vector<vector<float>> network){
+    ofstream myfile;
+    myfile.open (name);
+    if (myfile.is_open())
+    {
+        myfile << "This is a line.\n";
+        myfile << "This is another line.\n";
+        myfile.close();
+    }
+    else cout << "Unable to open file";
+}
+
 

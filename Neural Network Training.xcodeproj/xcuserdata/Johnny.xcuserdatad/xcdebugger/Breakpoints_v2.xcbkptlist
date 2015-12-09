@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471215539.563163"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471215539.563163"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "main(int argc, const char * argv[])"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,27 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471215539.563163"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "main(int argc, const char * argv[])"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Neural Network Training/main.cpp"
-            timestampString = "471323344.579188"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471323344.579188"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,48 +74,16 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471323356.11264"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
-            landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Neural Network Training/main.cpp"
-            timestampString = "471326293.850812"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "262"
-            endingLineNumber = "262"
-            landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Neural Network Training/main.cpp"
-            timestampString = "471334454.909344"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "backPropLearning(std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;, std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;)"
@@ -145,7 +97,7 @@
                   offsetFromSymbolStart = "1019">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "backPropLearning(std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;, std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;)"
@@ -159,7 +111,7 @@
                   offsetFromSymbolStart = "1039">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "backPropLearning(std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;, std::__1::vector&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt;, std::__1::allocator&lt;std::__1::vector&lt;float, std::__1::allocator&lt;float&gt; &gt; &gt; &gt;)"
@@ -178,15 +130,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471334449.901069"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
@@ -194,15 +146,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Neural Network Training/main.cpp"
-            timestampString = "471334463.133508"
+            timestampString = "471334930.557868"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "281"
-            endingLineNumber = "281"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "backPropLearning(vector&lt;vector&lt;float&gt;&gt; examples, vector&lt;vector&lt;float&gt;&gt; network)"
             landmarkType = "7">
          </BreakpointContent>
