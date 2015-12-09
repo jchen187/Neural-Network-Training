@@ -23,16 +23,16 @@ vector<vector<float>> network;
 
 //from the 2nd file
 int numTrainingExamples, inputs, outputs;
-int epoch, learningRate;
-
 vector<vector<float>> exampleInputs;
 vector<vector<float>> exampleOutputs; //0 or 1
 vector<vector<float>> examples;
 
+//user enters this
+int epoch, learningRate;
+
 void readFromFile1(string name);
 void readFromFile2(string name);
 vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network);
-
 
 int main(int argc, const char * argv[]) {
 
@@ -123,6 +123,17 @@ void readFromFile1(string name){
 
 //training examples to train
 void readFromFile2(string name){
+    /*
+     1st line has 3 integers
+     - number of training examples
+     - number of input nodes(will match file1)
+     - number of output nodes(will match file1)
+     
+     every other line is an example
+     - Ni floating point inputs
+     - No Boolean output(0 or 1)
+     */
+    
     ifstream myFile;
     myFile.open(file2);
     if (myFile.is_open()){
@@ -153,7 +164,7 @@ void readFromFile2(string name){
                         myFile >> exampleInputs[i][j];
                     }
                     else {
-                        myFile >> exampleOutputs[i][j - inputs];
+                        myFile >> exampleOutputs[i][j-inputs];
                     }
                 }
             }
@@ -162,17 +173,6 @@ void readFromFile2(string name){
     }
     else
         cout << "Unable to open file.\n";
-
-    /*
-     1st line has 3 integers
-     - number of training examples
-     - number of input nodes(will match file1)
-     - number of output nodes(will match file1)
-     
-     every other line is an example 
-     - Ni floating point inputs
-     - No Boolean output(0 or 1)
-     */
 }
 
 float applyActivFunct(float x){
@@ -189,8 +189,11 @@ float applyDerivActivFunct(float x){
 //examples include both input and output examples. same with network. contains first weight from input to hidden node, then hidden node to output
 vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<vector<float>> network){
     
-    //what does it mean indexed by network node
-    vector<float> errors;
+    //error for both outlayer and hiddenlayer
+    vector<vector<float>> errors;
+    errors.resize(2);
+    errors[0].resize(outputNodes);
+    errors[1].resize(hiddenNodes);
     
     int loop = 0;
     
@@ -199,9 +202,8 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
         //you could do numTrainingExamples or you can do the exampleInputs.size()
         for (int i = 0; i < numTrainingExamples; i++){
     
-            //get inputs
+            //base will contain all the example inputs
             vector<float> base = examples[i];
-            
             
             //propagate the inputs forward to compute the outputs
             vector<float> middle;
@@ -240,18 +242,32 @@ vector<vector<float>> backPropLearning(vector<vector<float>> examples, vector<ve
                 top[j] = applyActivFunct(result);
             }
             
-            //propagate error backwards from output layer to input
+            //vector<float> base = examples[i];
+            
+            //propagate delta backwards from output layer to input
             //go through each node in the output later
+            //errors[0] contains the error of the output
             for (int j = 0; j < outputNodes; j++){
-                errors[j] = applyDerivActivFunct(top[j]) * (base[numTrainingExamples+j] - top[j]);
+                errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - top[j]);
             }
             
             for (int j = 0; j < hiddenNodes; j++){
-                
+                //loop through the output layer
+                for (int k = 0; k < outputNodes; k++){
+                    //errors[1][j] += network[hiddenNodes+][k+1] * errors[0][k];
+                }
+                errors[1][j] *= applyDerivActivFunct(middle[j]);
             }
             
             //update every weight in network
             for (int j = 0; j < network.size(); j++){
+                //wij = wij + learningRate * activationI *errorsJ
+                if (j < hiddenNodes){
+                    
+                }
+                else {
+                    
+                }
             }
         }
         loop++;
