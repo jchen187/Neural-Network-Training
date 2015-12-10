@@ -43,7 +43,7 @@ int main(int argc, const char * argv[]) {
     cout << "Please enter the file containing the initial neural network\n";
     //read the file
 //    cin >> file1;
-    file1 = "initialNN.txt";
+    file1 = "0initialNN.txt";
     readFromFile1(file1);
     
     network.reserve( weightsToHidden.size() + weightsToOutput.size() ); // preallocate memory
@@ -54,7 +54,7 @@ int main(int argc, const char * argv[]) {
 //    cin >> file2;
 //    readFromFile2(file2);
 //    file2 = "miniTrain.txt";
-    file2 = "train.txt";
+    file2 = "2trainingExamples.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -63,7 +63,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "Where would you like to output the results to?\n";
 //    file3 = "compareToMiniResults.txt";
-    file3 = "compareToTrainNN.txt";
+    file3 = "2compareToTrainNN.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
