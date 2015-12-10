@@ -41,7 +41,6 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
 int main(int argc, const char * argv[]) {
 
     cout << "Please enter the file containing the initial neural network\n";
-    //read the file
 //    cin >> file1;
     file1 = "0initialNN.txt";
     readFromFile1(file1);
@@ -52,9 +51,8 @@ int main(int argc, const char * argv[]) {
     
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
-//    readFromFile2(file2);
-    file2 = "1miniTrainingExamples.txt";
-//    file2 = "2trainingExamples.txt";
+//    file2 = "1miniTrainingExamples.txt";
+    file2 = "2trainingExamples.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -63,12 +61,12 @@ int main(int argc, const char * argv[]) {
     
     cout << "Where would you like to output the results to?\n";
 //    cin >> file3;
-    file3 = "1compareToMiniResults.txt";
-//    file3 = "2compareToTrainNN.txt";
+//    file3 = "1compareToMiniResults.txt";
+    file3 = "2compareToTrainNN.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
-    epoch = 1;
+    epoch = 100;
     
     cout << "Choose learning rate.\n";
 //    cin >> learningRate;
@@ -76,7 +74,6 @@ int main(int argc, const char * argv[]) {
     
     vector<vector<double>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
-//    writeNetworkToFile("t.txt", network);
 
     return 0;
 }
@@ -262,17 +259,13 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
             for (int j = 0; j < outputNodes; j++){
                 errors[0][j] = 0;
                 errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - applyActivFunct(top[j]));
-                //cout << "errorTop" << errors[0][j] << "\n";
-                
             }
             
-            //i think there is something wrong here. when i do epoch 1 for the bigger set it doesnt match
-            for (int j = 0; j < hiddenNodes; j++){
-                
+            for (int j = 0; j < hiddenNodes; j++){                
                 errors[1][j] = 0;
                 //loop through the output layer
                 for (int k = 0; k < outputNodes; k++){
-                    //IGNORING THE BIAS WEIGHT? if we are we will use j+1
+                    //IGNORING THE BIAS WEIGHT AND USING j+1
                     errors[1][j] += network[hiddenNodes+k][j+1] * errors[0][k];
 
                 }
@@ -280,7 +273,6 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
             }
             
             //update every weight in network - breaking this up into two separate parts
-            //
             for (int j = 0; j < hiddenNodes; j++){
                 //wij = wij + learningRate * activationI *errorsJ
                 
@@ -291,9 +283,6 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     }
                     else {
                         network[j][k] = network[j][k] + learningRate * base[k-1] * errors[1][j];
-//                        cout << "learn " << learningRate << endl;
-//                        cout << base[k-1] << endl;
-//                        cout << errors[1][j] << endl;
                     }
                     
                 }
@@ -311,12 +300,9 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     }
                     else {
                         network[hiddenNodes+j][k] = network[hiddenNodes+j][k] + learningRate * applyActivFunct(middle[k-1]) * errors[0][j];
-                        
-//                        cout << middle[k-1] << " - " << applyActivFunct(middle[k-1]) << endl;
                     }
                 }
             }
-            //I DONT THINK I DID THE BIAS WEIGHT
         }
         loop++;
     }
