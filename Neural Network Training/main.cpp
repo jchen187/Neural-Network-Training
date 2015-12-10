@@ -53,8 +53,8 @@ int main(int argc, const char * argv[]) {
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
 //    readFromFile2(file2);
-//    file2 = "miniTrain.txt";
-    file2 = "2trainingExamples.txt";
+    file2 = "1miniTrainingExamples.txt";
+//    file2 = "2trainingExamples.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -62,8 +62,9 @@ int main(int argc, const char * argv[]) {
     examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
     cout << "Where would you like to output the results to?\n";
-//    file3 = "compareToMiniResults.txt";
-    file3 = "2compareToTrainNN.txt";
+//    cin >> file3;
+    file3 = "1compareToMiniResults.txt";
+//    file3 = "2compareToTrainNN.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
@@ -259,6 +260,7 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
             //go through each node in the output later
             //errors[0] contains the error of the output
             for (int j = 0; j < outputNodes; j++){
+                errors[0][j] = 0;
                 errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - applyActivFunct(top[j]));
                 //cout << "errorTop" << errors[0][j] << "\n";
                 
@@ -267,16 +269,12 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
             //i think there is something wrong here. when i do epoch 1 for the bigger set it doesnt match
             for (int j = 0; j < hiddenNodes; j++){
                 
-                
+                errors[1][j] = 0;
                 //loop through the output layer
                 for (int k = 0; k < outputNodes; k++){
-                    //ARE WE IGNORING THE BIAS WEIGHT? if we are we will use j+1
+                    //IGNORING THE BIAS WEIGHT? if we are we will use j+1
                     errors[1][j] += network[hiddenNodes+k][j+1] * errors[0][k];
-                    
-                    //testing purposes
-                    if (i==0){
-                        cout << "w " <<network[hiddenNodes+k][j+1] << "\n";
-                    }
+
                 }
                 errors[1][j] *= applyDerivActivFunct(middle[j]);
             }
@@ -333,13 +331,9 @@ void writeNetworkToFile(string name, vector<vector<double>> network){
     {
         myfile << inputNodes << " " << hiddenNodes << " " << outputNodes << "\n";
         
-        //size is hidden + output
         for (int i = 0; i < hiddenNodes; i++){
-//            myfile << "This is another line.\n";
             for (int j = 0; j < inputNodes + 1; j++){
                 myfile << fixed << setprecision(3) << network[i][j] << " ";
-                //ceil(num*pow(10,x))/pow(10,x)
-
             }
             myfile << "\n";
         }
