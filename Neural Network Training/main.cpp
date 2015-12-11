@@ -42,9 +42,9 @@ int main(int argc, const char * argv[]) {
 
     cout << "Please enter the file containing the initial neural network\n";
 //    cin >> file1;
-//    file1 = "0initialNN.txt";
+    file1 = "0initialNN.txt";
 //    file1 = "MINE_1initialNN.txt";
-    file1 = "grades_initialNN.txt";
+//    file1 = "grades_initialNN.txt";
     readFromFile1(file1);
     
     network.reserve( weightsToHidden.size() + weightsToOutput.size() ); // preallocate memory
@@ -54,9 +54,9 @@ int main(int argc, const char * argv[]) {
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
 //    file2 = "1miniTrainingExamples.txt";
-//    file2 = "2trainingExamples.txt";
+    file2 = "2trainingExamples.txt";
 //    file2 = "MINE_1trainExamples.txt";
-    file2 = "grades_trainExamples.txt";
+//    file2 = "grades_trainExamples.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -66,9 +66,9 @@ int main(int argc, const char * argv[]) {
     cout << "Where would you like to output the results to?\n";
 //    cin >> file3;
 //    file3 = "1compareToMiniResults.txt";
-//    file3 = "2compareToTrainNN.txt";
+    file3 = "2compareToTrainNN.txt";
 //    file3 = "MINE_1results.txt";
-    file3 = "grades_compareToResults.txt";
+//    file3 = "grades_compareToResults.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
@@ -76,7 +76,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "Choose learning rate.\n";
 //    cin >> learningRate;
-    learningRate = 0.05;
+    learningRate = 0.1;
     
     vector<vector<double>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
