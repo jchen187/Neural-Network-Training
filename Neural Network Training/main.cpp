@@ -42,7 +42,9 @@ int main(int argc, const char * argv[]) {
 
     cout << "Please enter the file containing the initial neural network\n";
 //    cin >> file1;
-    file1 = "0initialNN.txt";
+//    file1 = "0initialNN.txt";
+//    file1 = "MINE_1initialNN.txt";
+    file1 = "grades_initialNN.txt";
     readFromFile1(file1);
     
     network.reserve( weightsToHidden.size() + weightsToOutput.size() ); // preallocate memory
@@ -52,7 +54,9 @@ int main(int argc, const char * argv[]) {
     cout << "Please enter the file containing the training set.\n";
 //    cin >> file2;
 //    file2 = "1miniTrainingExamples.txt";
-    file2 = "2trainingExamples.txt";
+//    file2 = "2trainingExamples.txt";
+//    file2 = "MINE_1trainExamples.txt";
+    file2 = "grades_trainExamples.txt";
     readFromFile2(file2);
     
     examples.reserve( exampleInputs.size() + exampleOutputs.size() ); // preallocate memory
@@ -62,7 +66,9 @@ int main(int argc, const char * argv[]) {
     cout << "Where would you like to output the results to?\n";
 //    cin >> file3;
 //    file3 = "1compareToMiniResults.txt";
-    file3 = "2compareToTrainNN.txt";
+//    file3 = "2compareToTrainNN.txt";
+//    file3 = "MINE_1results.txt";
+    file3 = "grades_compareToResults.txt";
     
     cout << "Choose epoch.\n";
 //    cin >> epoch;
@@ -70,7 +76,7 @@ int main(int argc, const char * argv[]) {
     
     cout << "Choose learning rate.\n";
 //    cin >> learningRate;
-    learningRate = 0.1;
+    learningRate = 0.05;
     
     vector<vector<double>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
@@ -214,7 +220,7 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
             vector<double> middle;
             middle.resize(hiddenNodes);
             
-            //loop through each hidden node
+            //loop through each hidden node and set the weighted inputs
             for (int j = 0; j < hiddenNodes; j++){
                 double result = 0;
                 //get contribution from each node from previous layer
@@ -229,12 +235,9 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     }
                 }
                 middle[j] = result;
-//                cout << "Middle" << j << endl;
-//                cout << middle[j] << "\n\n";
-//                middle[j] = applyActivFunct(result);
             }
             
-            //output
+            //weighted inputs for output
             vector<double> top;
             top.resize(outputNodes);
             for (int j = 0; j < outputNodes; j++){
@@ -248,10 +251,7 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                     }
                 }
                 top[j] = result;
-//                top[j] = applyActivFunct(result);
             }
-            
-            //vector<double> base = examples[i];
             
             //propagate delta backwards from output layer to input
             //go through each node in the output later
@@ -261,7 +261,7 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
                 errors[0][j] = applyDerivActivFunct(top[j]) * (examples[numTrainingExamples+i][j] - applyActivFunct(top[j]));
             }
             
-            for (int j = 0; j < hiddenNodes; j++){                
+            for (int j = 0; j < hiddenNodes; j++){
                 errors[1][j] = 0;
                 //loop through the output layer
                 for (int k = 0; k < outputNodes; k++){
@@ -319,13 +319,19 @@ void writeNetworkToFile(string name, vector<vector<double>> network){
         
         for (int i = 0; i < hiddenNodes; i++){
             for (int j = 0; j < inputNodes + 1; j++){
-                myfile << fixed << setprecision(3) << network[i][j] << " ";
+                myfile << fixed << setprecision(3) << network[i][j];
+                if (j != inputNodes){
+                    myfile << " ";
+                }
             }
             myfile << "\n";
         }
         for (int i = 0; i < outputNodes; i++){
             for (int j = 0; j < hiddenNodes + 1; j++){
-                myfile << fixed << setprecision(3) << network[hiddenNodes+i][j] << " ";
+                myfile << fixed << setprecision(3) << network[hiddenNodes+i][j];
+                if (j != hiddenNodes){
+                    myfile << " ";
+                }
             }
             myfile << "\n";
         }
