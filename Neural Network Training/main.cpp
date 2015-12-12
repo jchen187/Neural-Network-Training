@@ -41,8 +41,8 @@ vector<vector<double>> backPropLearning(vector<vector<double>> examples, vector<
 int main(int argc, const char * argv[]) {
 
     cout << "Please enter the file containing the initial neural network\n";
-//    cin >> file1;
-    file1 = "0initialNN.txt";
+    cin >> file1;
+//    file1 = "0initialNN.txt";
 //    file1 = "MINE_1initialNN.txt";
 //    file1 = "grades_initialNN.txt";
     readFromFile1(file1);
@@ -52,9 +52,9 @@ int main(int argc, const char * argv[]) {
     network.insert( network.end(), weightsToOutput.begin(), weightsToOutput.end() );
     
     cout << "Please enter the file containing the training set.\n";
-//    cin >> file2;
+    cin >> file2;
 //    file2 = "1miniTrainingExamples.txt";
-    file2 = "2trainingExamples.txt";
+//    file2 = "2trainingExamples.txt";
 //    file2 = "MINE_1trainExamples.txt";
 //    file2 = "grades_trainExamples.txt";
     readFromFile2(file2);
@@ -64,19 +64,19 @@ int main(int argc, const char * argv[]) {
     examples.insert( examples.end(), exampleOutputs.begin(), exampleOutputs.end() );
     
     cout << "Where would you like to output the results to?\n";
-//    cin >> file3;
+    cin >> file3;
 //    file3 = "1compareToMiniResults.txt";
-    file3 = "2compareToTrainNN.txt";
+//    file3 = "2compareToTrainNN.txt";
 //    file3 = "MINE_1results.txt";
 //    file3 = "grades_compareToResults.txt";
     
     cout << "Choose epoch.\n";
-//    cin >> epoch;
-    epoch = 100;
+    cin >> epoch;
+//    epoch = 200;
     
     cout << "Choose learning rate.\n";
-//    cin >> learningRate;
-    learningRate = 0.1;
+    cin >> learningRate;
+//    learningRate = 0.1;
     
     vector<vector<double>> newNetwork = backPropLearning(examples, network);
     writeNetworkToFile(file3, newNetwork);
